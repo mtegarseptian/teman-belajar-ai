@@ -14,10 +14,6 @@ class Material extends Model
         'status',
     ];
 
-    /**
-     * Scope untuk mengambil materi yang aktif saja.
-     * Nanti dipakai oleh KnowledgeService.
-     */
     public function scopeActive($query)
     {
         return $query->where('status', 'active');

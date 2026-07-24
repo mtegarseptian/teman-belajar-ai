@@ -12,11 +12,9 @@ return [
     |
     */
 
-    'gemini' => [
-
-        'api_key' => env('GEMINI_API_KEY'),
-        'model' => env('GEMINI_MODEL', 'gemini-2.5-flash'),
-
+    'openrouter' => [
+        'key' => env('OPENROUTER_API_KEY'),
+        'model' => env('OPENROUTER_MODEL', 'nvidia/nemotron-3-ultra-550b-a55b:free'),
     ],
 
     'postmark' => [
@@ -41,4 +39,3 @@ return [
     ],
 
 ];
-    

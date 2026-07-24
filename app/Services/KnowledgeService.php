@@ -21,18 +21,24 @@ class KnowledgeService
 
     /**
      * Ambil konteks materi yang relevan berdasarkan pertanyaan user.
-     * Placeholder — belum aktif.
      *
      * @param  string  $userMessage
      * @return string
      */
     public function getRelevantContext(string $userMessage): string
     {
-        // TODO: implementasi pencarian materi relevan (keyword search / vector search)
-        // Contoh nanti:
-        // $materials = $this->materialRepository->searchByKeyword($userMessage);
-        // return $materials->pluck('content')->implode("\n\n");
+        $materials = $this->materialRepository->searchByKeyword($userMessage);
 
-        return '';
+        if ($materials->isEmpty()) {
+            return '';
+        }
+
+        $contextLines = [];
+        foreach ($materials as $material) {
+            $categoryTag = !empty($material->category) ? " [Kategori: {$material->category}]" : '';
+            $contextLines[] = "=== {$material->title}{$categoryTag} ===\n{$material->content}";
+        }
+
+        return implode("\n\n", $contextLines);
     }
 }
